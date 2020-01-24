@@ -1,0 +1,19 @@
+{
+  "name": "webserveraccess",
+  "version": "1.0.0",
+  "description": "Get perfect Ensurance functions Snir Devs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Snir-soft-solution/webserver.git"
+  },
+  "author": "snir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Snir-soft-solution/webserver/issues"
+  },
+  "homepage": "https://github.com/Snir-soft-solution/webserver#readme"
+}
