@@ -1,10 +1,11 @@
 {
     "name": "webserveraccess",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Get perfect Ensurance functions Snir Devs",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon index.js"
     },
     "repository": {
         "type": "git",
@@ -15,5 +16,15 @@
     "bugs": {
         "url": "https://github.com/Snir-soft-solution/webserver/issues"
     },
-    "homepage": "https://github.com/Snir-soft-solution/webserver#readme"
+    "homepage": "https://github.com/Snir-soft-solution/webserver#readme",
+    "dependencies": {
+        "axios": "^0.19.2",
+        "dotenv": "^8.2.0",
+        "nodemon": "^2.0.2"
+    },
+    "devDependencies": {
+        "axios": "^0.19.2",
+        "dotenv": "^8.2.0",
+        "nodemon": "^2.0.2"
+    }
 }
