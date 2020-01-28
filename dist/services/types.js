@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var PLANOTYPES;
+(function (PLANOTYPES) {
+    PLANOTYPES["SAUDE"] = "SAUDE";
+    PLANOTYPES["VIAGEM"] = "VIAGEM";
+    PLANOTYPES["AUTOMOVEL"] = "AUTOMOVEL";
+    PLANOTYPES["ACIDENTETRABALHO"] = "ACIDENTETRABALHO";
+    PLANOTYPES["RESPONSABILIDADE"] = "RESPONSABILIDADE";
+})(PLANOTYPES = exports.PLANOTYPES || (exports.PLANOTYPES = {}));

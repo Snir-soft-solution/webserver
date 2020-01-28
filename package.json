@@ -1,11 +1,13 @@
 {
     "name": "webserveraccess",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Get perfect Ensurance functions Snir Devs",
-    "main": "index.js",
+    "main": "dist/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon index.js"
+        "dev": "nodemon src/index.ts",
+        "build": "tsc -p .",
+        "start": "nodemon test.js"
     },
     "repository": {
         "type": "git",
@@ -23,8 +25,21 @@
         "nodemon": "^2.0.2"
     },
     "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^2.17.0",
+        "@typescript-eslint/parser": "^2.17.0",
         "axios": "^0.19.2",
         "dotenv": "^8.2.0",
-        "nodemon": "^2.0.2"
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.9.0",
+        "eslint-config-standard": "^14.1.0",
+        "eslint-plugin-import": "^2.20.0",
+        "eslint-plugin-node": "^11.0.0",
+        "eslint-plugin-prettier": "^3.1.2",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-standard": "^4.0.1",
+        "nodemon": "^2.0.2",
+        "prettier": "^1.19.1",
+        "sucrase": "^3.12.1",
+        "typescript": "^3.7.5"
     }
 }

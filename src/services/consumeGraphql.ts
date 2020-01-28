@@ -1,28 +1,29 @@
-const axios = require('axios');
+import axios, { AxiosPromise } from 'axios';
+import {isEmpty} from '../helpers/helpers'
 class GraphQL {
+    private schemma:object = {};
+    private tb:string = '';
     constructor() {
-        this.schema = '';
-        this.__tb = '';
     }
 
-    generic({ query, variables, uri }) {
-
+    generic(value:any) : any {
+        const { query, variables, uri } = value;
         if (query === '') return console.error('you must pass some string on the query property');
         if (query !== undefined) {
-            this.schema = { query, variables }
+            this.schemma = { query, variables }
         } else {
-            this.schema = { query }
+            this.schemma = { query }
         }
         return fetch(uri, {
             method: "post",
-            body: JSON.stringify(this.schema),
+            body: JSON.stringify(this.schemma),
             headers: { "Content-Type": "application/json" }
         });
 
     }
 
-    get({ query, table, properties }) {
-        this.__tb = table;
+    get({ query, table, properties }:any):any {
+        this.tb = table;
         var val = '',
             props = '';
         const isSearchProps = ',$search:Boolean';
@@ -33,63 +34,67 @@ class GraphQL {
         }
         if (query === '') return console.error('you must pass some string on the query property');
         if (query !== undefined) {
-            this.schema = {
+            this.schemma = {
                 query: `query($id: String!, $consts: String ${props}) { ${table} (id: $id, consts: $consts ${val}) {${properties}} }`,
                 variables: {
                     ...query
                 }
             }
         } else {
-            this.schema = {
+            this.schemma = {
                 query: `query { ${table} {${properties}} }`
             }
         }
         return this;
     }
 
-    add({ table, properties, values }) {
-        this.schema = {
+    add({ table, properties, values }:any):any {
+        this.schemma = {
             query: `mutation($obj: ${table[0].toLowerCase() + table.substr(1, table.length)}Input!) { add${table}(obj: $obj) {${properties}} }`,
             variables: {
                 obj: values
             }
         }
-        this.__tb = `add${table}`;
-
+        this.tb = `add${table}`;
         return this;
     }
 
-    update({ query, table, properties, values }) {
-        this.schema = {
+    update({ query, table, properties, values }:any):any {
+        this.schemma = {
             query: `mutation($id: String!, $obj: ${table.toLowerCase()}Input!) { update${table}(id: $id, obj: $obj) {${properties}} }`,
             variables: {
                 id: query.id,
                 obj: values
             }
         }
-        this.__tb = `update${table}`;
+        this.tb = `update${table}`;
         return this;
     }
 
-    remove({ query, table, properties }) {
-        this.schema = {
+    remove({ query, table, properties }:any):any {
+        this.schemma = {
             query: `mutation($id: String!) { remove${table}(id: $id) {${properties}} }`,
             variables: {
                 id: query.id
             }
         }
-        this.__tb = `remove${table}`;
+        this.tb = `remove${table}`;
         return this;
     }
 
     auth() {}
 
-    async run(uri) {
-        return await axios.post(uri, this.schema)
-            .then(res => res.data.data)
+    async run(uri:string,callback?:Function){
+        return await axios.post(uri, this.schemma)
+            .then(res => {
+                const {errors} = res.data;
+                if(!isEmpty(errors))  throw new Error(errors[0].message)
+                if(callback !== undefined)
+                    return callback(res.data.data)
+                return res.data.data
+            })
             .catch(err => err)
     }
 
 }
-
-exports.GraphQL = new GraphQL;
+export default new GraphQL();
