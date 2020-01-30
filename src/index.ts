@@ -15,29 +15,29 @@ const service = new Service('WEBISTE')
 
 // service.storePessoa({input:"",output:""},)
 
-// service
-// .auth
-// .signUp(
-//     {
-//     username: "adilsonLopes",
-//     email: "adilsonLopes@hotmail.com",
-//     password: "Snir.@#123",
-//     confirmarPassword: "Snir.@#123"
-//    },
-//    "token username"
-// ).then((e:any)=>{
-//     console.log(e)
-// })
-
 service
 .auth
-.signIn(
+.signUp(
     {
-    nomeUsuarioOuEmail: "adilsonLopes",
-    senha: "Snir.@#123"
+    username: "adilsonLopes ",
+    email: "adilsonLopes@hotmail.com",
+    password: "Snir.@#123a",
+    confirmarPassword: "Snir.@#123"
    },
-   "token nomeUsuarioOuEmail"
+   "token username"
 ).then((e:any)=>{
     console.log(e)
 })
+
+// service
+// .auth
+// .signIn(
+//     {
+//     nomeUsuarioOuEmail: "adilsonLopes",
+//     senha: "Snir.@#123"
+//    },
+//    "token nomeUsuarioOuEmail"
+// ).then((e:any)=>{
+//     console.log(e)
+// })
 export const IService = Service

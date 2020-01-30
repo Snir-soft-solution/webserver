@@ -4,6 +4,7 @@ import {IService,IInsertModel, ICotacao, IAuthObjectForSignIn,IAuthObjectForSign
 import Pessoa from '../modules/Pessoa/pessoa';
 import Cotation,{CotationModel} from '../modules/Cotacao/cotation';
 import { PESSOAS } from './types';
+import { isEmpty } from '../helpers/helpers';
 
 export class Service implements IService {
     constructor(private platform:string,private uri?:string,){
@@ -76,9 +77,23 @@ export class Service implements IService {
                 return GraphQL.signIn(obj,properties).run(this.uri)
             },
             signUp:(obj:IAuthObjectForSignUp,properties:string)=>{
+                const {email,confirmarPassword,password,username} = obj;
+
+                if(username.trim().split(' ').length !== 1)
+                    return this.throwError( { message:'Username não deve conter espaço em branco', } ) 
+
+                if (isEmpty(confirmarPassword) || isEmpty(password) || password !== confirmarPassword )
+                { return this.throwError( { message:'Palavra passe vazio ou a palavra passa não está igual com a palavra passa de confirmação', } ) }
+
                 return GraphQL.storeUser(obj,properties).run(this.uri)
             }
         }
+    }
+
+    async throwError(msm:any){
+        return new Promise((resolve,reject)=>{
+            resolve(msm)
+       })
     }
 
     /**
