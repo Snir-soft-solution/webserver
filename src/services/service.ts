@@ -85,6 +85,8 @@ export class Service implements IService {
                 if (isEmpty(confirmarPassword) || isEmpty(password) || password !== confirmarPassword )
                 { return this.throwError( { message:'Palavra passe vazio ou a palavra passa não está igual com a palavra passa de confirmação', } ) }
 
+                if(isEmpty(email))
+
                 return GraphQL.storeUser(obj,properties).run(this.uri)
             }
         }

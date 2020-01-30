@@ -12,8 +12,15 @@ Then...
 import {IService} from 'webserveraccess';
 
 ## Use Task
+ `Fetch data`
 
     service.task.get({ table: 'tabeName', properties: 'designacao' }).then(response=>{
+    console.log(response)
+    }).catch((err:any)=>console.log(err))
+
+ `Store data`
+ 
+    service.task.insert({ table:"tableName", properties:'outputProperties', values:'dataToStoreIntoDB' }).then(response=>{
     console.log(response)
     }).catch((err:any)=>console.log(err))
 
