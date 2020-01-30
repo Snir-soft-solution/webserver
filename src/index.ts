@@ -15,19 +15,19 @@ const service = new Service('WEBISTE')
 
 // service.storePessoa({input:"",output:""},)
 
-service
-.auth
-.signUp(
-    {
-    username: "adilsonLopes ",
-    email: "adilsonLopes@hotmail.com",
-    password: "Snir.@#123a",
-    confirmarPassword: "Snir.@#123"
-   },
-   "token username"
-).then((e:any)=>{
-    console.log(e)
-})
+// service
+// .auth
+// .signUp(
+//     {
+//     username: "adilsonLopes",
+//     email: "adilsonLopes@hotmail.com",
+//     password: "Snir.@#123a",
+//     confirmarPassword: "Snir.@#123"
+//    },
+//    "token username"
+// ).then((e:any)=>{
+//     console.log(e)
+// })
 
 // service
 // .auth

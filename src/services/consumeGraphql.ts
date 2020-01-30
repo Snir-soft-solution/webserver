@@ -134,3 +134,5 @@ class GraphQL {
 
 }
 export default new GraphQL();
+
+
