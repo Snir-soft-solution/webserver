@@ -1,5 +1,5 @@
 import {MOBILE,WEBAPP,WEBISTE,COTACAOTEMPLATE} from './platforms'
-import {CotationModel} from '../services/cotation'
+import {CotationModel} from '../modules/Cotacao/cotation'
 export class  Validation {
     constructor(private platform:string) {
         this.platform = platform;

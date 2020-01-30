@@ -1,5 +1,7 @@
 import axios, { AxiosPromise } from 'axios';
 import {isEmpty} from '../helpers/helpers'
+import { IAuthProperties, IAuthObjectForSignIn,IAuthObjectForSignUp } from '../interfaces';
+import {AUTHOPTIONS} from './types'
 class GraphQL {
     private schemma:object = {};
     private tb:string = '';
@@ -82,16 +84,50 @@ class GraphQL {
         return this;
     }
 
-    auth() {}
+    storeUser(objt:IAuthObjectForSignUp, properties?:string): any {
+        this.schemma = {
+            query:`mutation($obj:registerInput!)
+                {
+                    registrar(obj:$obj)
+                    {
+                        ${properties}
+                    }
+                }`,
+            variables:{
+                obj:objt
+            }
+        }
+        return this;
+    }
+
+    signIn(objt:IAuthObjectForSignIn, properties?:string):any{
+        this.schemma = {
+            query:`query($obj:loginInput!)
+                {
+                    login(obj:$obj)
+                    {
+                       ${properties}
+                    }
+                }`,
+            variables:{
+                obj:objt
+            }
+        }
+        return this;
+    }
+
 
     async run(uri:string,callback?:Function){
         return await axios.post(uri, this.schemma)
             .then(res => {
+                let result = {success:false,data:[]};
                 const {errors} = res.data;
                 if(!isEmpty(errors))  throw new Error(errors[0].message)
+                result.data = res.data.data;
+                result.success = true;
                 if(callback !== undefined)
-                    return callback(res.data.data)
-                return res.data.data
+                    return callback(result)
+                return result;
             })
             .catch(err => err)
     }

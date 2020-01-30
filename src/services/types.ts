@@ -7,4 +7,12 @@ export enum PLANOTYPES {
     RESPONSABILIDADE = 'RESPONSABILIDADE',
 }
 
+export enum PESSOAS{
+    SINGULAR = "SINGULAR",
+    COLETIVO = "COLETIVO",
+}
 
+export enum AUTHOPTIONS{
+    SIGNIN = "SIGNIN",
+    SIGNUP = "SIGNUP",
+}

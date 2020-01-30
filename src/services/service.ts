@@ -1,22 +1,18 @@
-import {DEFAULT_URI} from '../helpers/config'
 import GraphQL from './consumeGraphql';
-import Cotation,{CotationModel} from './cotation';
+import {DEFAULT_URI} from '../helpers/config'
+import {IService,IInsertModel, ICotacao, IAuthObjectForSignIn,IAuthObjectForSignUp, IAuthProperties, IAuth} from '../interfaces'
+import Pessoa from '../modules/Pessoa/pessoa';
+import Cotation,{CotationModel} from '../modules/Cotacao/cotation';
+import { PESSOAS } from './types';
 
-interface IService{
-    uri:string,
-    platform:string,
-    getStatus: ()=> object
-}
-
-export class Service implements IService{
-    uri!: string;
-    platform: string;
-    constructor(platform:string,uri?:string,){
+export class Service implements IService {
+    constructor(private platform:string,private uri?:string,){
         this.uri = uri || DEFAULT_URI;
         this.platform = platform.toUpperCase();
     }
 
     getStatus(): object{
+        
         return {
             uri:this.uri,
             platform: this.platform
@@ -37,13 +33,59 @@ export class Service implements IService{
         }
     }
 
-    InsertCotacao(model:any,type:string,output?:string):any{
-        output = output || 'idCotacao'
-        const _instance = new Cotation(model);
+
+    storePessoa(model:IInsertModel){
+        const {type} = model;
+        const _instance = new Pessoa({pessoa:""});
+        if(type?.toUpperCase() === PESSOAS.SINGULAR){
+            _instance.onSave()
+        }
+        else if(type?.toUpperCase() === PESSOAS.COLETIVO){
+
+        }
+
+       
+       
+    }
+
+    /**
+     *  Cotações
+     *  Aqui terá todas as funções que vai lida com os Cotações
+     */
+
+    storeCotacao(config:ICotacao):any{
+        let {output,data,type,table} = config;
+        table = table || 'Cotacao';
+        output = output || 'idCotacao';
+        const _instance = new Cotation(data);
+        
         if(_instance.onInsert(type.toUpperCase()) !== true) return new Error("AS")
 
-        return this.task.insert({table:'Cotacao',values:model,properties:output})
+        return this.task.insert({table,values:data,properties:output})
     }
+
+
+
+    /**
+     * Autenticação
+     *  Aqui terá todas as funções que vai lida com os questionario
+     */
+    get auth():IAuth{
+        return {
+            signIn:(obj:IAuthObjectForSignIn,properties:string)=>{
+                return GraphQL.signIn(obj,properties).run(this.uri)
+            },
+            signUp:(obj:IAuthObjectForSignUp,properties:string)=>{
+                return GraphQL.storeUser(obj,properties).run(this.uri)
+            }
+        }
+    }
+
+    /**
+     *  Questionarios
+     *  Aqui terá todas as funções que vai lida com os questionario
+     */
+
 }
 
 

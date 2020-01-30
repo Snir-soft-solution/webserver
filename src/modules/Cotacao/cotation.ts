@@ -1,6 +1,6 @@
- import {isEmpty} from '../helpers/helpers'
- import {ISError} from '../helpers/error';
-import {PLANOTYPES} from './types'
+ import {isEmpty} from '../../helpers/helpers'
+ import {ISError} from '../../helpers/error';
+import {PLANOTYPES} from '../../services/types'
 export  class CotationModel {
     coberturaSelecionada:[];
     tomadorId:string;
