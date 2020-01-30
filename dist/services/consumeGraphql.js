@@ -132,19 +132,39 @@ var GraphQL = /** @class */ (function () {
         this.tb = "remove" + table;
         return this;
     };
-    GraphQL.prototype.auth = function () { };
+    GraphQL.prototype.storeUser = function (objt, properties) {
+        this.schemma = {
+            query: "mutation($obj:registerInput!)\n                {\n                    registrar(obj:$obj)\n                    {\n                        " + properties + "\n                    }\n                }",
+            variables: {
+                obj: objt
+            }
+        };
+        return this;
+    };
+    GraphQL.prototype.signIn = function (objt, properties) {
+        this.schemma = {
+            query: "query($obj:loginInput!)\n                {\n                    login(obj:$obj)\n                    {\n                       " + properties + "\n                    }\n                }",
+            variables: {
+                obj: objt
+            }
+        };
+        return this;
+    };
     GraphQL.prototype.run = function (uri, callback) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, axios_1.default.post(uri, this.schemma)
                             .then(function (res) {
+                            var result = { success: false, data: [] };
                             var errors = res.data.errors;
                             if (!helpers_1.isEmpty(errors))
                                 throw new Error(errors[0].message);
+                            result.data = res.data.data;
+                            result.success = true;
                             if (callback !== undefined)
-                                return callback(res.data.data);
-                            return res.data.data;
+                                return callback(result);
+                            return result;
                         })
                             .catch(function (err) { return err; })];
                     case 1: return [2 /*return*/, _a.sent()];
