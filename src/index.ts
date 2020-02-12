@@ -3,12 +3,21 @@ import {isEmpty} from './helpers/helpers'
 import {COTACAOTEMPLATE} from './helpers/platforms'
 const service = new Service('WEBISTE')
 
-// service.task.get({ table: 'allLinhaProduto', properties: 'designacao' }).then((e:any)=>{
-//     console.log(e)
-// }).catch((err:any)=>console.log(err))
+// const viagem = async () =>{
+//     try {
+//         let data = await service.task.get({ table: 'allLinhaProduto', properties: 'designacao' });
+//         console.log(data)
+//     } catch (error) {
+//         console.log(error.toJSON())
+//     }
+   
+// }
+
+// viagem()
+
 //COTACAOTEMPLATE,'viagem','tomadorId produtorId idCotacao'
 // service
-// .InsertCotacao({data:COTACAOTEMPLATE,type:'viagem',output:'tomadorId produtorId idCotacao'})
+// .storeCotacao({data:COTACAOTEMPLATE,type:'viagem',output:'tomadorId produtorId idCotacao'})
 // .then((e:any)=>{
 //     console.log(e)
 // })
