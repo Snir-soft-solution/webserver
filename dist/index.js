@@ -2,12 +2,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var service_1 = require("./services/service");
 var service = new service_1.Service('WEBISTE');
-// service.task.get({ table: 'allLinhaProduto', properties: 'designacao' }).then((e:any)=>{
-//     console.log(e)
-// }).catch((err:any)=>console.log(err))
+// const viagem = async () =>{
+//     try {
+//         let data = await service.task.get({ table: 'allLinhaProduto', properties: 'designacao' });
+//         console.log(data)
+//     } catch (error) {
+//         console.log(error.toJSON())
+//     }
+// }
+// viagem()
 //COTACAOTEMPLATE,'viagem','tomadorId produtorId idCotacao'
 // service
-// .InsertCotacao({data:COTACAOTEMPLATE,type:'viagem',output:'tomadorId produtorId idCotacao'})
+// .storeCotacao({data:COTACAOTEMPLATE,type:'viagem',output:'tomadorId produtorId idCotacao'})
 // .then((e:any)=>{
 //     console.log(e)
 // })
@@ -18,19 +24,22 @@ var service = new service_1.Service('WEBISTE');
 //     {
 //     username: "adilsonLopes",
 //     email: "adilsonLopes@hotmail.com",
-//     password: "Snir.@#123",
+//     password: "Snir.@#123a",
 //     confirmarPassword: "Snir.@#123"
 //    },
 //    "token username"
 // ).then((e:any)=>{
 //     console.log(e)
 // })
-service
-    .auth
-    .signIn({
-    nomeUsuarioOuEmail: "adilsonLopes",
-    senha: "Snir.@#123"
-}, "token nomeUsuarioOuEmail").then(function (e) {
-    console.log(e);
-});
+// service
+// .auth
+// .signIn(
+//     {
+//     nomeUsuarioOuEmail: "adilsonLopes",
+//     senha: "Snir.@#123"
+//    },
+//    "token nomeUsuarioOuEmail"
+// ).then((e:any)=>{
+//     console.log(e)
+// })
 exports.IService = service_1.Service;

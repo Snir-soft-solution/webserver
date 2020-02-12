@@ -1,6 +1,6 @@
 {
     "name": "webserveraccess",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "Get perfect Ensurance functions Snir Devs",
     "main": "dist/index.js",
     "scripts": {
